@@ -31,6 +31,7 @@
 </template>
 
 <script>
+	import baseUrl from '../../config'
 	export default {
 		name : 'login',
 		data() {
@@ -63,7 +64,7 @@
 				}
 				if(this.valid){
 					if(this.valid){
-						this.$http.post('http://localhost:8000/login',this.user).then((response)=>{
+						this.$http.post(`${baseUrl.uri}/login`,this.user).then((response)=>{
 							if(response.body.success){
 								swal({
 									title: 'Bienvenido(a)!',
