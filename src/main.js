@@ -33,7 +33,7 @@ const router = new VueRouter({
 		},
     	{
       		name: 'Tarea',
-			path: '/tarea/:id',
+			path: '/tarea',
 			component: Tarea
 		},
 		{

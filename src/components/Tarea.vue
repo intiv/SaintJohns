@@ -75,11 +75,13 @@
 			}
 		},
 		beforeMount(){
+			alert(`${baseUrl.uri}/tareas/buscar/id/`+this.$route.query.id);
 			if(JSON.parse(localStorage.getItem('usuario'))===null){
 				swal('No puede acceder a esta pagina!','Debe hacer login antes de acceder a la pagina','warning');
 				this.$router.push('/login');
 			}else{
-				this.$http.get(`${baseUrl.uri}/tareas/buscar/id/`+this.$route.params.id).then((response)=>{
+				
+				this.$http.get(`${baseUrl.uri}/tareas/buscar/id/`+this.$route.query.id).then((response)=>{
 					if(response.body.success){
 						alert(JSON.stringify(response.body.tarea));
 						this.tarea=response.body.tarea;
