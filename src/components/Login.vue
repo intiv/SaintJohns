@@ -100,7 +100,7 @@
 		beforeMount(){
 			if(JSON.parse(localStorage.getItem('usuario'))!=null){
 				localStorage.removeItem('usuario');
-				this.$http.put('http://localhost:8000/logout').then((response)=>{
+				this.$http.put(`${baseUrl.uri}/logout`).then((response)=>{
 					
 				});
 			}
