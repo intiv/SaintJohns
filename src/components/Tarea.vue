@@ -81,9 +81,10 @@
 			}else{
 				this.$http.get(`${baseUrl.uri}/tareas/buscar/id/`+this.$route.params.id).then((response)=>{
 					if(response.body.success){
+						alert(JSON.stringify(response.body.tarea));
 						this.tarea=response.body.tarea;
 					}else{
-						swal('something went wrong','','error');
+						swal('Error obteniendo informacion de tarea','','error');
 					}
 				});
 			}

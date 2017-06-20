@@ -32,6 +32,7 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
+											<!-- <router-link :to="'/tarea?'+{{tarea.}}" -->
 											<button v-if="isStudent" class="waves-effect waves-light btn">
 												Agregar Entrega
 											</button>
