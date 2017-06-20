@@ -136,6 +136,7 @@
 </template>
 
 <script>
+	import baseUrl from '../../config'
 	export default{
 		name: 'Clase',
 		data() {
@@ -170,10 +171,10 @@
 				swal('No puede acceder a esta pagina!','Debe hacer login antes de acceder a la pagina','warning');
 				this.$router.push('/login');
 			}else{
-				this.$http.get('http://localhost:8000/seccion/buscar?cuenta='+query.cuenta+'&grado='+query.grado+'&year='+query.year+'&apartado='+query.apartado).then((response)=>{
+				this.$http.get(`${baseUrl.uri}/seccion/buscar?cuenta=`+query.cuenta+'&grado='+query.grado+'&year='+query.year+'&apartado='+query.apartado).then((response)=>{
 					if(response.body.success){
 						this.seccion=response.body.seccion;
-						this.$http.get('http://localhost:8000/usuarios/maestros/'+this.seccion.maestro).then((respuesta)=>{
+						this.$http.get(`${baseUrl.uri}/usuarios/maestros/`+this.seccion.maestro).then((respuesta)=>{
 							if(respuesta.body.success){
 								this.seccion.maestro=respuesta.body.teacher.nombre;
 							}else{
@@ -181,7 +182,7 @@
 							}
 						});
 						var sec=(query.year+'_'+query.grado+'_'+query.apartado+'_'+query.cuenta);
-						this.$http.get('http://localhost:8000/tareas/buscar/seccion/'+sec).then((response)=>{
+						this.$http.get(`${baseUrl.uri}/tareas/buscar/seccion/`+sec).then((response)=>{
 							if(response.body.success){
 								for(var i =0; i<response.body.tareas.length; i++){
 									var currHW = response.body.tareas[i];

@@ -42,6 +42,7 @@
 </template>
 
 <script>
+	import baseUrl from '../../config'
 	export default{
 		name: 'tarea',
 		data(){
@@ -78,7 +79,7 @@
 				swal('No puede acceder a esta pagina!','Debe hacer login antes de acceder a la pagina','warning');
 				this.$router.push('/login');
 			}else{
-				this.$http.get('http://localhost:8000/tareas/buscar/id/'+this.$route.params.id).then((response)=>{
+				this.$http.get(`${baseUrl.uri}/tareas/buscar/id/`+this.$route.params.id).then((response)=>{
 					if(response.body.success){
 						this.tarea=response.body.tarea;
 					}else{
