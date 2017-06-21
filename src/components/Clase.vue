@@ -8,7 +8,6 @@
 				<li>Apartado: {{seccion.apartado}} </li>
 				<li>Año: {{seccion.ano}} </li>
 				<li>Maestro: {{seccion.maestro}} </li>
-				
 			</ul>
 		</div>
 		<hr>
@@ -21,7 +20,7 @@
 						<ul class="collapsible" data-collapsible="accordion" v-for="tarea in parcial1">
 							<li>
 								<div v-on:click="collapse" class="collapsible-header">
-									{{tarea.titulo}} - {{tarea.parcial}}: {{tarea.valor}} Puntos
+									{{tarea.titulo}} - Parcial {{tarea.parcial}}: {{tarea.valor}} Puntos
 								</div>
 								<div class="collapsible-body">
 									<div class="row">
@@ -32,10 +31,11 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<!-- <router-link :to="'/tarea?'+{{tarea.}}" -->
-											<button v-if="isStudent" class="waves-effect waves-light btn">
+											
+											<button class="waves-effect waves-light btn" v-on:click="redirect(tarea._id)">
 												Agregar Entrega
 											</button>
+										
 										</div>
 									</div>
 								</div>
@@ -59,10 +59,12 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<button class="waves-effect waves-light btn">
+										
+											<button class="waves-effect waves-light btn" v-on:click="redirect(tarea._id)">
 												<div class="buttonText" v-if="isStudent">Agregar Entrega</div>
 												<div class="buttonText" v-if="!isStudent">Revisar Entregas</div>
 											</button>
+											
 										</div>
 									</div>
 								</div>
@@ -88,7 +90,7 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<button class="waves-effect waves-light btn">
+											<button class="waves-effect waves-light btn" v-on:click="redirect(tarea._id)">
 												<div class="buttonText" v-if="isStudent">
 													Agregar Entrega
 												</div>
@@ -119,10 +121,12 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<button class="waves-effect waves-light btn">
-												<div class="buttonText" v-if="isStudent"><span>Agregar Entrega</span></div>
-												<div class="buttonText" v-if="!isStudent">Revisar Entregas</div>
-											</button>
+											
+												<button class="waves-effect waves-light btn" v-on:click="redirect(tarea._id)">
+													<div class="buttonText" v-if="isStudent"><span>Agregar Entrega</span></div>
+													<div class="buttonText" v-if="!isStudent">Revisar Entregas</div>
+												</button>
+											
 										</div>
 									</div>
 								</div>
@@ -163,6 +167,10 @@
 					$('.collapsible').collapsible();
 					this.colapsado=true;
 				}
+			},
+			redirect(id){
+				alert(id);
+				this.$router.push('/tarea?id='+id);
 			}
 		},
 		beforeMount(){

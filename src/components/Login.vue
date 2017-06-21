@@ -71,7 +71,6 @@
 									type: 'success'
 								});
 								localStorage.setItem('usuario',JSON.stringify({usuario: response.body.usuario, scope: response.body.scope}));
-								alert(JSON.parse(localStorage.getItem('usuario')).usuario);
 								this.$router.push('/');
 							}else{
 								if(response.body.tipo==='length' || response.body.tipo==='null'){

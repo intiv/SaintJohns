@@ -86,7 +86,7 @@
 						alert(JSON.stringify(response.body.tarea));
 						this.tarea=response.body.tarea;
 					}else{
-						swal('Error obteniendo informacion de tarea','','error');
+						swal('Error obteniendo informacion de tarea',JSON.stringify(response.body.message),'error');
 					}
 				});
 			}

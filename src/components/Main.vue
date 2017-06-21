@@ -1,8 +1,6 @@
 <template>
 	<div id="root">
 		<div class="row" id="contentContainer">
-			Hola
-			
 		</div>
 	</div>
 </template>
