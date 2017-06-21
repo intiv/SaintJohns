@@ -81,6 +81,38 @@
 
 <style>
 
+  @keyframes fadein {
+      0% { opacity: 0; }
+      80%   { opacity: 0; }
+      90% {opacity: 0.5;}
+      100% {opacity: 1;}
+  }
+
+  @keyframes slidein {
+      0% { opacity: 0; }
+      80%   { opacity: 0; }
+      90% {opacity: 0.5;}
+      100% {opacity: 1;}
+  }
+
+  /* Firefox < 16 */
+  @-moz-keyframes fadein {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }
+
+  /* Safari, Chrome and Opera > 12.1 */
+  @-webkit-keyframes fadein {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }
+
+  /* Internet Explorer */
+  @-ms-keyframes fadein {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+  }
+
   html{
     font-family: "Roboto", sans-serif;
   }
@@ -98,6 +130,11 @@
   }
 
   nav{
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera < 12.1 */
+    animation: fadein 2s;
     background-color: #2B455E;
     filter: saturate(200%);
     width: 95vw;
@@ -106,6 +143,7 @@
     display: block;
     box-shadow: 10px 0 5px #888888;
     margin-left:2%;
+    
   }
 
   #navBar{
@@ -124,7 +162,7 @@
     transition: background-color 0.3s ease-in-out;
   }
 
-  .brand-logo:hover{
+  .brand-logo:hover {
     background-color: #13416D;
     transition: background-color 0.3s ease-in-out;
   }
@@ -140,6 +178,11 @@
   }
 
   aside{
+    -webkit-animation: fadein 2.5s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2.5s; /* Firefox < 16 */
+    -ms-animation: fadein 2.5s; /* Internet Explorer */
+    -o-animation: fadein 2.5s; /* Opera < 12.1 */
+    animation: fadein 2.5s;
     border: 1px solid red;
     background-color: red;
     filter: saturate(35%);
@@ -185,6 +228,11 @@
   }
 
   #contentRender{
+    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 2s; /* Firefox < 16 */
+    -ms-animation: fadein 2s; /* Internet Explorer */
+    -o-animation: fadein 2s; /* Opera < 12.1 */
+    animation: fadein 2s;
     padding-left: 10px !important;
     border: 1px solid lightgrey;
     margin-top: 10px;

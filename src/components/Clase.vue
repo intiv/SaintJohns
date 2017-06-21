@@ -24,18 +24,20 @@
 								</div>
 								<div class="collapsible-body">
 									<div class="row">
-										<div class="col l10 m10 s10">
+										<div class="col l18 m8 s8">
 											<span>{{tarea.descripcion}} <br>
 												Fecha asignada: {{tarea.fecha_de_envio}}<br>
 												Fecha maxima de entrega: {{tarea.fecha_de_entrega}}
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											
-											<button class="waves-effect waves-light btn" v-on:click="redirect(tarea._id)">
-												Agregar Entrega
+											<button id="" class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
+												<div class="buttonText" v-if="isStudent===0">Agregar</div>
+												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
-										
+										</div>
+										<div class="col l2 m2 s2">
+											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar1(tarea)">X</button>
 										</div>
 									</div>
 								</div>
@@ -52,19 +54,20 @@
 								<div v-on:click="collapse" class="collapsible-header">{{tarea.titulo}} - {{tarea.parcial}}: {{tarea.valor}} Puntos</div>
 								<div class="collapsible-body">
 									<div class="row">
-										<div class="col l10 m10 s10">
+										<div class="col l8 m8 s8">
 											<span>{{tarea.descripcion}} <br>
 												Fecha asignada: {{tarea.fecha_de_envio}}<br>
 												Fecha maxima de entrega: {{tarea.fecha_de_entrega}}
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-										
-											<button class="waves-effect waves-light btn" v-on:click="redirect(tarea._id)">
-												<div class="buttonText" v-if="isStudent">Agregar Entrega</div>
-												<div class="buttonText" v-if="!isStudent">Revisar Entregas</div>
+											<button class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
+												<div class="buttonText" v-if="isStudent===0">Agregar</div>
+												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
-											
+										</div>
+										<div class="col l2 m2 s2">
+											<button v-if="isStudent===1||isStudent===2" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="deleteTarea(tarea._id)">X</button>
 										</div>
 									</div>
 								</div>
@@ -83,19 +86,20 @@
 								</div>
 								<div class="collapsible-body">
 									<div class="row">
-										<div class="col l10 m10 s10">
+										<div class="col l8 m8 s8">
 											<span>{{tarea.descripcion}} <br>
 												Fecha asignada: {{tarea.fecha_de_envio}}<br>
 												Fecha maxima de entrega: {{tarea.fecha_de_entrega}}
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<button class="waves-effect waves-light btn" v-on:click="redirect(tarea._id)">
-												<div class="buttonText" v-if="isStudent">
-													Agregar Entrega
-												</div>
-												<div class="buttonText" v-if="!isStudent">Revisar Entregas</div>
+											<button class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
+												<div class="buttonText" v-if="isStudent===0">Agregar</div>
+												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
+										</div>
+										<div class="col l2 m2 s2">
+											<button v-if="isStudent===1||isStudent===2" class="buttonBorrarTarea btn-floating waves-effect waves-light btn"  v-on:click="deleteTarea(tarea._id)">X</button>
 										</div>
 									</div>
 								</div>
@@ -114,19 +118,20 @@
 								</div>
 								<div class="collapsible-body">
 									<div class="row">
-										<div class="col l10 m10 s10">
+										<div class="col l8 m8 s8">
 											<span>{{tarea.descripcion}} <br>
 												Fecha asignada: {{tarea.fecha_de_envio}}<br>
 												Fecha maxima de entrega: {{tarea.fecha_de_entrega}}
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											
-												<button class="waves-effect waves-light btn" v-on:click="redirect(tarea._id)">
-													<div class="buttonText" v-if="isStudent"><span>Agregar Entrega</span></div>
-													<div class="buttonText" v-if="!isStudent">Revisar Entregas</div>
-												</button>
-											
+											<button id="" class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
+												<div class="buttonText" v-if="isStudent===0">Agregar</div>
+												<div class="buttonText" v-if="isStudent===1">Revisar</div>
+											</button>
+										</div>
+										<div class="col l2 m2 s2">
+											<button v-if="isStudent===1||isStudent===2" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="deleteTarea(tarea._id)">X</button>
 										</div>
 									</div>
 								</div>
@@ -158,7 +163,8 @@
 					ano: ''
 				},
 				colapsado: false,
-				isStudent: false
+				isStudent: 0,
+				sec: ''
 			}
 		},
 		methods : {
@@ -169,8 +175,55 @@
 				}
 			},
 			redirect(id){
-				alert(id);
 				this.$router.push('/tarea?id='+id);
+			},
+			borrar(indice,tarea){
+				if(indice===1){
+					this.parcial1= [];
+				}else if(indice===2){
+					this.parcial2= [];
+				}else if(indice===3){
+					this.parcial3= [];
+				}else if(indice===4){
+					this.parcial4= [];
+				}
+				this.deleteTarea(tarea._id);
+			},
+			deleteTarea(id){
+				this.$http.delete(`${baseUrl.uri}/tareas/borrar/`+id).then((response)=>{
+					if(response.body.success){
+						swal('awilson','','success');
+						this.getTareas();
+					}else{
+						swal('Error!',response.body.message,'error');
+					}
+				});
+			},
+			getTareas(){
+				this.$http.get(`${baseUrl.uri}/tareas/buscar/seccion/`+this.sec).then((response)=>{
+					if(response.body.success){
+						for(var i =0; i<response.body.tareas.length; i++){
+							var currHW = response.body.tareas[i];
+							if(currHW.parcial===1){
+								if(this.parcial1.indexOf(currHW)===-1){
+									this.parcial1.push(currHW);
+								}
+							}else if(currHW.parcial===2){
+								this.parcial2.push(currHW);
+							}else if(currHW.parcial===3){
+								this.parcial3.push(currHW);
+							}else if(currHW.parcial===4){
+								this.parcial4.push(currHW);
+							}
+						}
+					}else{
+						swal(
+							'Error obteniendo tareas',
+							'Revise su conexion a internet o pongase en contacto con los desarrolladores',
+							'error'
+						);
+					}
+				});
 			}
 		},
 		beforeMount(){
@@ -190,25 +243,8 @@
 								swal('Error obteniendo maestro',respuesta.body.message,'error');
 							}
 						});
-						var sec=(query.year+'_'+query.grado+'_'+query.apartado+'_'+query.cuenta);
-						this.$http.get(`${baseUrl.uri}/tareas/buscar/seccion/`+sec).then((response)=>{
-							if(response.body.success){
-								for(var i =0; i<response.body.tareas.length; i++){
-									var currHW = response.body.tareas[i];
-									if(currHW.parcial===1){
-										this.parcial1.push(currHW);
-									}else if(currHW.parcial===2){
-										this.parcial2.push(currHW);
-									}else if(currHW.parcial===3){
-										this.parcial3.push(currHW);
-									}else if(currHW.parcial===4){
-										this.parcial4.push(currHW);
-									}
-								}
-							}else{
-								swal('Error obteniendo tareas','Revise su conexion a internet o pongase en contacto con los desarrolladores','erro');
-							}
-						});						
+						this.sec=(query.year+'_'+query.grado+'_'+query.apartado+'_'+query.cuenta);
+						this.getTareas();						
 					}else{
 						swal('Error obteniendo seccion',response.body.message+', '+response.body.tipo,'error');
 					}
@@ -234,4 +270,26 @@
 	.buttonText{
 		font-size: 1vw;
 	}
+
+	.buttonBorrarTarea{
+		width: 3vw;
+		background-color: #7D2323;
+	}
+
+	.buttonAccionTarea{
+		width: 10vw;
+		font-size: 1vw;
+		background-color: #15497B;
+	}
+
+	.buttonBorrarTarea:hover{
+		background-color: #612B2B;
+		transition: background-color 0.3s ease-in-out;
+	}
+
+	.buttonAccionTarea:hover{
+		background-color: #13416D;
+		transition: background-color 0.3s ease-in-out;
+	}
+
 </style>

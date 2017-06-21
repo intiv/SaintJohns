@@ -6,19 +6,19 @@
 					<img src="../imgs/icon.jpg" class="circle responsive-image" alt="icono" id="logo">
 				</div>
 				<div class="col l8 m8 s8" id="title">
-					<h3>Saint John's </h3>
+					<h3>&nbsp;&nbsp;Saint John's </h3>
 					<h3>Bilingual School</h3>
 				</div>
 			</div>
 			<div id="body">
 				<div class="row">
 					<div class="input-field col l10 m10 s10 offset-l1 offset-m1 offset-s1">
-						<input type="text" id="username" placeholder="Username" class="validate" v-model="user.usuario">	
+						<input type="text" id="username" placeholder="Nombre de usuario" class="validate" v-model="user.usuario">	
 					</div>
 				</div>
 				<div class="row">
 					<div class="col l10 m10 s10 offset-l1 offset-m1 offset-s1 input-field">
-						<input type="password" name="password" id="password" placeholder="Password" v-model="user.contrasena">
+						<input type="password" name="password" id="password" placeholder="Contraseña" v-model="user.contrasena">
 					</div>
 				</div>
 				<div class="row" id="boton">
@@ -71,7 +71,6 @@
 									title: 'Bienvenido(a)!',
 									type: 'success'
 								});
-								alert(JSON.stringify(response.body.usuario));
 								localStorage.setItem(
 									'usuario',
 									JSON.stringify({
@@ -130,11 +129,6 @@
 		background-repeat: no-repeat;
 		background-size: cover;
 		padding-top: 10%;
-		-webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
-        -moz-animation: fadein 1s; /* Firefox < 16 */
-        -ms-animation: fadein 1s; /* Internet Explorer */
-        -o-animation: fadein 1s; /* Opera < 12.1 */
-        animation: fadein 1s;
 	}
 
 	#container{
@@ -149,7 +143,7 @@
 	#header{
 		width: 100%;
 		background-color: #7B2323;
-		padding-left: 10px;
+		padding-left: 7%;
 		font-size: 5vh;
 		padding-top: 10px;
 		border-radius: 4px;
@@ -166,35 +160,13 @@
 
 	
 	#title{
-		-webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-        -moz-animation: fadein 2s; /* Firefox < 16 */
-        -ms-animation: fadein 2s; /* Internet Explorer */
-        -o-animation: fadein 2s; /* Opera < 12.1 */
-        animation: fadein 2s;
+		-webkit-animation: fadein 2.5s; /* Safari, Chrome and Opera > 12.1 */
+        -moz-animation: fadein 2.5s; /* Firefox < 16 */
+        -ms-animation: fadein 2.5s; /* Internet Explorer */
+        -o-animation: fadein 2.5s; /* Opera < 12.1 */
+        animation: fadein 2.5s;
 	}
 
-	@keyframes fadein {
-	    from { opacity: 0; }
-	    to   { opacity: 1; }
-	}
-
-	/* Firefox < 16 */
-	@-moz-keyframes fadein {
-	    from { opacity: 0; }
-	    to   { opacity: 1; }
-	}
-
-	/* Safari, Chrome and Opera > 12.1 */
-	@-webkit-keyframes fadein {
-	    from { opacity: 0; }
-	    to   { opacity: 1; }
-	}
-
-	/* Internet Explorer */
-	@-ms-keyframes fadein {
-	    from { opacity: 0; }
-	    to   { opacity: 1; }
-	}
 
 	#body{
 		width: 100%;

@@ -4,8 +4,12 @@
 			<div class="col l8 m8 s8 push-l2 push-m2">
 				<div id="tarea-info">
 					<div id="tareaHeader">
-						<h3 id="tareaTitulo">{{tarea.titulo}}</h3>
-						<p id="tareaDescripcion">{{tarea.descripcion}}</p>
+						<div class="row">
+							<h3 id="tareaTitulo">{{tarea.titulo}}</h3>
+							<p id="tareaDescripcion">{{tarea.descripcion}}</p>
+							
+							
+						</div>
 					</div>
 					<hr>
 					<div id="tareaBody">
@@ -62,7 +66,6 @@
                 // this.formData.append('file', files[0]);
                 //alert(this.formData.get('file'));
                 this.file = files[0];
-                alert(this.file.name);
                 $('#enviarTarea').prop('disabled',false);
             },
 			cancelar(){
@@ -75,7 +78,6 @@
 			}
 		},
 		beforeMount(){
-			alert(`${baseUrl.uri}/tareas/buscar/id/`+this.$route.query.id);
 			if(JSON.parse(localStorage.getItem('usuario'))===null){
 				swal('No puede acceder a esta pagina!','Debe hacer login antes de acceder a la pagina','warning');
 				this.$router.push('/login');
@@ -83,7 +85,6 @@
 				
 				this.$http.get(`${baseUrl.uri}/tareas/buscar/id/`+this.$route.query.id).then((response)=>{
 					if(response.body.success){
-						alert(JSON.stringify(response.body.tarea));
 						this.tarea=response.body.tarea;
 					}else{
 						swal('Error obteniendo informacion de tarea',JSON.stringify(response.body.message),'error');
