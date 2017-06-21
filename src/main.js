@@ -5,6 +5,7 @@ import Test from './components/Test.vue'
 import Login from './components/Login.vue'
 import Tarea from './components/Tarea.vue'
 import Clase from './components/Clase.vue'
+import Pantalla_de_maestros from './components/Pantalla_de_maestros.vue'
 import VueRouter from 'vue-router'
 import VueResource from 'vue-resource'
 
@@ -40,7 +41,13 @@ const router = new VueRouter({
 			name: 'Clase',
 			path: '/clase',
 			component: Clase
+		},
+		{
+      		name: 'Pantalla_de_maestros',
+			path: '/Pantalla_de_maestros',
+			component: Pantalla_de_maestros
 		}
+		
 
 	]
 });
