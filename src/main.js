@@ -3,6 +3,7 @@ import App from './App.vue'
 import Main from './components/Main.vue'
 import Test from './components/Test.vue'
 import Login from './components/Login.vue'
+import Landing from './components/Landing.vue'
 import Tarea from './components/Tarea.vue'
 import Clase from './components/Clase.vue'
 import Pantalla_de_maestros from './components/Pantalla_de_maestros.vue'
@@ -19,7 +20,7 @@ const router = new VueRouter({
 			name : 'Home',
 			path : '/',
 			//redirect : '/login',
-			component : Main
+			component : Landing
 		},
 		{
 			name : 'Test',

@@ -3,10 +3,11 @@
 		<div id="container">
 			<div class="row" id="header">
 				<div class="col l4 m4 s4">
-					<img src="./src/icon.jpg" alt="icono" id="logo">
+					<img src="../imgs/icon.jpg" class="circle responsive-image" alt="icono" id="logo">
 				</div>
 				<div class="col l8 m8 s8" id="title">
-					<p>Saint John's Bilingual School</p>
+					<h3>Saint John's </h3>
+					<h3>Bilingual School</h3>
 				</div>
 			</div>
 			<div id="body">
@@ -70,7 +71,15 @@
 									title: 'Bienvenido(a)!',
 									type: 'success'
 								});
-								localStorage.setItem('usuario',JSON.stringify({usuario: response.body.usuario, scope: response.body.scope}));
+								alert(JSON.stringify(response.body.usuario));
+								localStorage.setItem(
+									'usuario',
+									JSON.stringify({
+										usuario: response.body.usuario, 
+										scope: response.body.scope, 
+										cuenta: response.body.cuenta
+									})
+								);
 								this.$router.push('/');
 							}else{
 								if(response.body.tipo==='length' || response.body.tipo==='null'){
@@ -97,11 +106,8 @@
 			}
 		},
 		beforeMount(){
-			alert(JSON.parse(localStorage.getItem('usuario')));
 			if(localStorage.getItem('usuario')!=null){
 				localStorage.removeItem('usuario');
-
-
 				// this.$http.put(`${baseUrl.uri}/logout`).then((response)=>{
 					
 				// });
@@ -112,13 +118,23 @@
 
 <style scoped>
 
+	h3{
+		font-size: 3vw;
+		color: white;
+	}
+
 	#loginRoot{
 		width:100vw;
 		height: 100vh;
-		background-image: url('./src/bluegradient.jpg');
+		background-image: url('../../imgs/bluegradient.jpg');
 		background-repeat: no-repeat;
 		background-size: cover;
 		padding-top: 10%;
+		-webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+        -moz-animation: fadein 1s; /* Firefox < 16 */
+        -ms-animation: fadein 1s; /* Internet Explorer */
+        -o-animation: fadein 1s; /* Opera < 12.1 */
+        animation: fadein 1s;
 	}
 
 	#container{
@@ -145,8 +161,10 @@
         -ms-animation: fadein 2s; /* Internet Explorer */
         -o-animation: fadein 2s; /* Opera < 12.1 */
         animation: fadein 2s;
+
 	}
 
+	
 	#title{
 		-webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
         -moz-animation: fadein 2s; /* Firefox < 16 */
@@ -185,7 +203,8 @@
 	}
 
 	#app{
-		background-image: url('./src/bluegradient.jpg');
+		background-image: url('../../imgs/bluegradient.jpg');
+		background-size: cover;
 	}
 
 	#boton{
@@ -204,4 +223,10 @@
 		color: black;
 	}
 
+	@media (min-width: 700px)
+	and (max-width: 1800px){
+		#logo{
+			height: 12vw;
+		}
+	}
 </style>

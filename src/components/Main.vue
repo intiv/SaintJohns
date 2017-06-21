@@ -27,10 +27,9 @@
 			}
 		},
 		beforeMount(){
-			if(JSON.parse(localStorage.getItem('usuario'))===null){
-				swal('No puede acceder a esta pagina!','Debe hacer login antes de acceder a la pagina','warning');
-				this.$router.push('/login');
-			}
+			// if(JSON.parse(localStorage.getItem('usuario'))===null){
+			// 	this.$router.push('/login');
+			// }
 		}
 	}
 </script>

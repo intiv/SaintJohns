@@ -5,19 +5,22 @@
         <nav>
           <div class="nav-wrapper">
             <div class="row">
-              <div class="col l2 m2 s2">
-                  <img src="./src/icon.jpg" alt="icono" id="icono">
+              <div class="col l2 m2 s2" id="logoContainer">
+                  <a href="#">
+                    <img class="responsive-img circle" src="./imgs/icon.jpg" alt="icono" id="icono">
+                  </a>
               </div>
               <div class="col l10 m10 s10 ">
                 <div class="row">
                   <div class="col l4 m4 s4">
-                  <router-link to="/"><a class="brand-logo">&nbsp; Sistema Escuela &nbsp;</a></router-link>
+                    <router-link to="/">
+                      <a class="brand-logo">&nbsp;Saint John's Bilingual School &nbsp;</a>
+                    </router-link>
                   </div>
                   <div class="col l8 m8 s8">
                     <ul id="nav-mobile" class="right">
                       <li><router-link to="/test">Estudiantes</router-link></li>
                       <li><a href="#">Maestros</a></li>
-                      <li><a href="#">Asignaciones</a></li>
                     </ul>
                   </div>
                 </div>
@@ -80,29 +83,29 @@
 
   html{
     font-family: "Roboto", sans-serif;
-    
   }
 
   #icono{
     position: absolute;
     height: 100%;
-    width: 15.30%; 
+    width: 13%; 
   }
 
   #app{
     margin-top: 5px;
     width: 100vw;
-    margin-left: 5px;
+    
   }
 
   nav{
     background-color: #2B455E;
     filter: saturate(200%);
-    width: 98vw;
+    width: 95vw;
     height: 10vh;
     font-size: 10vw;
     display: block;
     box-shadow: 10px 0 5px #888888;
+    margin-left:2%;
   }
 
   #navBar{
@@ -112,6 +115,7 @@
   .sideContent{
     padding: 5%;
     height: 10%;
+
   }
 
   .sideContent:hover{
@@ -121,8 +125,7 @@
   }
 
   .brand-logo:hover{
-    background-color: #14426E;
-    filter: saturate(45%);
+    background-color: #13416D;
     transition: background-color 0.3s ease-in-out;
   }
 
@@ -140,16 +143,18 @@
     border: 1px solid red;
     background-color: red;
     filter: saturate(35%);
-    height: 88vh;
-    width: 15vw;
+    height: 85vh;
+    width: 13vw;
     text-align: center;
     margin-bottom: 5px;
-
+    margin-top: 10px;
+    margin-right: 10px;
   }
 
   #sideNav{
-    width: 15vw;
-    
+    width: 13vw;
+    margin-right: 10px;
+    margin-left:2%;
   }
 
   .sideContent{
@@ -164,8 +169,11 @@
 
   body{
     background-color: #F7F7F8;
-    
-  
+  }
+
+  #logoContainer:hover{
+    background-color: #13416D;
+    transition: background-color 0.3s ease-in-out;
   }
 
   .row{
@@ -179,13 +187,15 @@
   #contentRender{
     padding-left: 10px !important;
     border: 1px solid lightgrey;
+    margin-top: 10px;
     display: block;
-    height: 88vh;
-    width: 83vw;
+    height: 85vh;
+    width: 81.3vw;
     max-height: 88vh;
     max-width: 83vw;
     background-color: lightgrey;
     box-shadow: 10px 0 5px #888888;  
     overflow: scroll scroll;
+
   }
 </style>

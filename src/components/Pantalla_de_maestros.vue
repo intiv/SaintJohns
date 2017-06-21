@@ -62,7 +62,7 @@ import modal from './modal.vue'
 			
 			removeMaestro(row){
 				var index=this.rows.indexOf(row);
-				this.$http.delete('http://localhost:8000/usuarios/borrar/'+ this.rows[index]._id).then((response)=>{
+				this.$http.delete('${baseUrl.uri}/usuarios/borrar/'+ this.rows[index]._id).then((response)=>{
 				});
 				this.rows.splice(index,1);	
 				if(this.rows.length==0){
@@ -77,7 +77,7 @@ import modal from './modal.vue'
 
 		beforeMount(){
 			
-			this.$http.get('http://localhost:8000/usuarios/maestros').then((response)=>{
+			this.$http.get('${baseUrl.uri}/usuarios/maestros').then((response)=>{
 					this.rows=response.body;
 				});
 		}
