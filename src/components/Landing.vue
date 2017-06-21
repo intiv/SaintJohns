@@ -26,8 +26,8 @@
 			}else{
 				var user=JSON.parse(localStorage.getItem('usuario')).usuario;
 				alert(user);
-				this.$http.get(`${baseUrl.uri}/usuarios/buscar/id/asd`).then((response)=>{
-				});
+				// this.$http.get(`${baseUrl.uri}/usuarios/buscar/id/asd`).then((response)=>{
+				// });
 			}
 		}
 	}

@@ -97,11 +97,14 @@
 			}
 		},
 		beforeMount(){
-			if(JSON.parse(localStorage.getItem('usuario'))!=null){
+			alert(JSON.parse(localStorage.getItem('usuario')));
+			if(localStorage.getItem('usuario')!=null){
 				localStorage.removeItem('usuario');
-				this.$http.put(`${baseUrl.uri}/logout`).then((response)=>{
+
+
+				// this.$http.put(`${baseUrl.uri}/logout`).then((response)=>{
 					
-				});
+				// });
 			}
 		}
 	}
