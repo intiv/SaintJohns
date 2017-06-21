@@ -37,7 +37,7 @@
 											</button>
 										</div>
 										<div class="col l2 m2 s2">
-											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar1(tarea)">X</button>
+											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(1,tarea)">X</button>
 										</div>
 									</div>
 								</div>
@@ -67,7 +67,7 @@
 											</button>
 										</div>
 										<div class="col l2 m2 s2">
-											<button v-if="isStudent===1||isStudent===2" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="deleteTarea(tarea._id)">X</button>
+											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(2,tarea)">X</button>
 										</div>
 									</div>
 								</div>
@@ -99,7 +99,7 @@
 											</button>
 										</div>
 										<div class="col l2 m2 s2">
-											<button v-if="isStudent===1||isStudent===2" class="buttonBorrarTarea btn-floating waves-effect waves-light btn"  v-on:click="deleteTarea(tarea._id)">X</button>
+											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn"  v-on:click="borrar(3,tarea)">X</button>
 										</div>
 									</div>
 								</div>
@@ -131,7 +131,7 @@
 											</button>
 										</div>
 										<div class="col l2 m2 s2">
-											<button v-if="isStudent===1||isStudent===2" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="deleteTarea(tarea._id)">X</button>
+											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(4,tarea)">X</button>
 										</div>
 									</div>
 								</div>
