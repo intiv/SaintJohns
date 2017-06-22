@@ -3,22 +3,25 @@
 		
 		<div id="claseInfo">
 			<h3><b><u> {{seccion.cuenta}} </u></b></h3>
-			<ul>
-				<li>Grado: {{seccion.grado}} </li>
-				<li>Apartado: {{seccion.apartado}} </li>
-				<li>Año: {{seccion.ano}} </li>
-				<li>Maestro: {{seccion.maestro}} </li>
-				<li><hr></li>
-				<li><h5>Descripcion de la clase</h5></li>
+				<p>
+				Grado: {{seccion.grado}}&nbsp; &nbsp; 
+				Apartado: {{seccion.apartado}} &nbsp; &nbsp; 
+				Año: {{seccion.ano}} &nbsp; &nbsp; 
+				Maestro: {{seccion.maestro}} &nbsp; &nbsp; 
+				</p>
+				<hr>
+				<h5>Descripcion de la clase</h5>
 				<div class="row">
 					<div class="col l10 m10 s10 offset-l1 offset-m1 offset-s1" v-if="!modifyingInfo">
 						<div class="row">
 							<div class="col l10 m10 s10 push-l1 push-m1 push-s1">
 
-								<li> {{seccion.info}}</li>
+								{{seccion.info}}
 							</div>
 							<div class="col l1 m1 s1 push-l1 push-m1 push-s1" v-if="(isStudent===1||isStudent===2)">
-								<button class="btn-floating waves-light waves-effect btn orange" v-on:click="modifyingInfo=true"><i class="material-icons">create</i></button>
+								<button class="btn-floating waves-light waves-effect btn orange" v-on:click="modifyingInfo=true">
+									<i class="material-icons">create</i>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -34,9 +37,10 @@
 			</ul>
 		</div>
 		<hr>
-		<h4><i class="material-icons small">list</i>Tareas</h4>
-		<div id="tareasContainer">
-			<ul class="collapsible" data-collapsible="accordion">
+		<a id="tareasTab" v-on:click="toggle(1)" class="btn disabled"><i class="material-icons small">list</i>Tareas</a>
+		<a id="alumnosTab" v-on:click="toggle(2)" class="btn"><i class="material-icons small">person_pin</i>Alumnos</a>
+		<div id="tareasContainer" v-if="showTareas">
+			<ul class="collapsible" id="tareasCollection" data-collapsible="accordion">
 				<li>
 					<div v-on:click="collapse" class="collapsible-header">
 						<div class="row">
@@ -243,6 +247,11 @@
 				</li>
 			</ul>
 		</div>
+		<div id="alumnosContainer" v-if="!showTareas">
+			<ul class="collection" id="alumnosCollection">
+				<li class="collection-item" v-for="(alumno,index) in alumnos">{{index}}.- {{alumno.nombre}} - {{alumno.cuenta}}</li>
+			</ul>
+		</div>
 		<modalTarea v-if="showModal" @close="showModal=false" @done="finishModal()" :parcial="parcial" :seccion="sec" modo="tarea"></modalTarea>
 		<modalTarea v-if="showModify" @close="showModify=false" @done="finishModal()" :modify="true" :homework="tareaToModify" modo="tarea"></modalTarea>
 	</div>
@@ -266,6 +275,7 @@
 					maestro: '',
 					ano: ''
 				},
+				alumnos: [],
 				colapsado: false,
 				isStudent: 0,
 				sec: '',
@@ -274,7 +284,8 @@
 				tareaToModify: {
 				},
 				parcial: 0,
-				modifyingInfo: false
+				modifyingInfo: false,
+				showTareas: true
 			}
 		},
 		components: {
@@ -297,7 +308,7 @@
 				this.parcial4= [];
 				
 				this.deleteTarea(tarea._id);
-				$('.collapsible')
+				$('.collapsible').collapsible();
 			},
 			deleteTarea(id){
 				this.$http.delete(`${baseUrl.uri}/tareas/borrar/`+id).then((response)=>{
@@ -308,6 +319,27 @@
 						swal('Error borrando la tarea!','Revise su conexion a internet','error');
 					}
 				});
+			},
+			toggle(option){
+				if(option===1){
+					$('#tareasTab').addClass('disabled');
+					$('#alumnosTab').removeClass('disabled');
+					this.showTareas=true;
+				}else{
+					if(this.alumnos.length===0){
+						var partes=this.sec.split('_');
+						this.$http.get(`${baseUrl.uri}/seccion/buscar/alumnos?grado=`+partes[1]+'&apartado='+partes[2]+'&year='+partes[0]).then((response)=>{
+							if(response.body.success){
+								this.alumnos=response.body.alumnos;
+							}else{
+								swal('Error obteniendo los alumnos','Revise su conexion a internet','error');
+							}
+						});
+					}
+					$('#tareasTab').removeClass('disabled');
+					$('#alumnosTab').addClass('disabled');
+					this.showTareas=false;
+				}
 			},
 			getTareas(){
 				this.$http.get(`${baseUrl.uri}/tareas/buscar/seccion/`+this.sec).then((response)=>{
@@ -371,6 +403,7 @@
 		},
 		beforeMount(){
 			$('.collapsible').collapsible();
+			$('ul.tabs').tabs();
 			var query = this.$route.query;
 			if(JSON.parse(localStorage.getItem('usuario'))===null){
 				swal('No puede acceder a esta pagina!','Debe hacer login antes de acceder a la pagina','warning');
@@ -410,15 +443,26 @@
 	#claseInfo{
 		text-align: center;
 	}
-	#tareasContainer{
-		max-height: 50vh;
+	
+
+	#tareasCollection{
+		height: 50vh;
 		overflow-y: scroll;
 		overflow-x: auto;
 		display: block;
 	}
+
+	#alumnosCollection{
+		height: 50vh;
+		overflow-y: scroll;
+		overflow-x: auto;
+		display: block;
+	}
+
 	.buttonText{
 		font-size: 1vw;
 	}
+
 	.buttonBorrarTarea{
 		width: 3vw;
 		background-color: #7D2323;
@@ -438,6 +482,11 @@
 		width: 2.5vw;
 		height: 5vh;
 	}
+
+	a.disabled{
+		color: grey;
+	}
+
 	.buttonBorrarTarea:hover{
 		background-color: #612B2B;
 		transition: background-color 0.3s ease-in-out;
