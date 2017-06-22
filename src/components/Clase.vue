@@ -2,12 +2,35 @@
 	<div id="claseRoot">
 		
 		<div id="claseInfo">
-			<h3>{{seccion.cuenta}}</h3>
+			<h3><b><u> {{seccion.cuenta}} </u></b></h3>
 			<ul>
 				<li>Grado: {{seccion.grado}} </li>
 				<li>Apartado: {{seccion.apartado}} </li>
 				<li>Año: {{seccion.ano}} </li>
 				<li>Maestro: {{seccion.maestro}} </li>
+				<li><hr></li>
+				<li><h5>Descripcion de la clase</h5></li>
+				<div class="row">
+					<div class="col l10 m10 s10 offset-l1 offset-m1 offset-s1" v-if="!modifyingInfo">
+						<div class="row">
+							<div class="col l10 m10 s10 push-l1 push-m1 push-s1">
+
+								<li> {{seccion.info}}</li>
+							</div>
+							<div class="col l1 m1 s1 push-l1 push-m1 push-s1">
+								<button class="btn-floating waves-light waves-effect btn" v-on:click="modifyingInfo=true"><i class="material-icons">create</i></button>
+							</div>
+						</div>
+					</div>
+					<div class="col l10 m10 s10 " v-if="modifyingInfo">
+						<li>
+							<input type="text" id="modifySeccionInfo" v-model="seccion.info">
+						</li>
+					</div>
+					<div class="col l2 m2 s2" v-if="modifyingInfo">
+						<button class=" waves-light waves-effect btn" v-on:click="updateInfo()">Terminar</button>
+					</div>
+				</div>
 			</ul>
 		</div>
 		<hr>
@@ -47,7 +70,12 @@
 												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
 										</div>
-										<div class="col l2 m2 s2">
+										<div class="col l1 m1 s1">
+											<button :v-if="(isStudent===1||isStudent===2)" class="buttonModificarTarea btn-floating waves-effect waves-light btn orange" v-on:click="modificar(tarea)"> 
+												<i class="material-icons">create</i>
+											</button>
+										</div>
+										<div class="col l1 m1 s1">
 											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(1,tarea)">
 												<i class="material-icons">delete</i>
 											</button>
@@ -90,8 +118,13 @@
 												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
 										</div>
-										<div class="col l2 m2 s2">
-											<button v-if="isStudent===1" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(2,tarea)">
+										<div class="col l1 m1 s1">
+											<button :v-if="(isStudent===1||isStudent===2)" class="buttonModificarTarea btn-floating waves-effect waves-light btn orange" v-on:click="modificar(tarea)"> 
+												<i class="material-icons">create</i>
+											</button>
+										</div>
+										<div class="col l1 m1 s1">
+											<button v-if="isStudent===1||isStudent===2" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(2,tarea)">
 												<i class="material-icons small">delete</i>
 											</button>
 										</div>
@@ -191,7 +224,12 @@
 												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
 										</div>
-										<div class="col l2 m2 s2">
+										<div class="col l1 m1 s1">
+											<button :v-if="(isStudent===1||isStudent===2)" class="buttonModificarTarea btn-floating waves-effect waves-light btn orange" v-on:click="modificar(tarea)"> 
+												<i class="material-icons">create</i>
+											</button>
+										</div>
+										<div class="col l1 m1 s1">
 											<button v-if="isStudent===1" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(4,tarea)">
 												<i class="material-icons">delete</i>
 											</button>
@@ -236,7 +274,8 @@
 				tareaToModify: {
 
 				},
-				parcial: 0
+				parcial: 0,
+				modifyingInfo: false
 			}
 		},
 		components: {
@@ -253,24 +292,21 @@
 				this.$router.push('/tarea?id='+id);
 			},
 			borrar(indice,tarea){
-				if(indice===1){
-					this.parcial1= [];
-				}else if(indice===2){
-					this.parcial2= [];
-				}else if(indice===3){
-					this.parcial3= [];
-				}else if(indice===4){
-					this.parcial4= [];
-				}
+				this.parcial1= [];
+				this.parcial2= [];
+				this.parcial3= [];
+				this.parcial4= [];
+				
 				this.deleteTarea(tarea._id);
+				$('.collapsible')
 			},
 			deleteTarea(id){
 				this.$http.delete(`${baseUrl.uri}/tareas/borrar/`+id).then((response)=>{
 					if(response.body.success){
-						swal('awilson','','success');
+						swal('Tarea borrada con exito!','','success');
 						this.getTareas();
 					}else{
-						swal('Error!',response.body.message,'error');
+						swal('Error borrando la tarea!','Revise su conexion a internet','error');
 					}
 				});
 			},
@@ -322,9 +358,17 @@
 				// $('.collapsible').collapsible();
 			},
 			modificar(tarea){
-
 				this.tareaToModify=tarea;
 				this.showModify=true;
+			},
+			updateInfo(){
+				this.$http.put(`${baseUrl.uri}/secciones/info/`+this.seccion._id,this.seccion).then((response)=>{
+					if(!response.body.success){
+						swal('No se actualizo la informacion!','Revise su conexion a internet','error');
+					}
+					this.modifyingInfo=false;
+					//modify
+				});
 			}
 		},
 		beforeMount(){

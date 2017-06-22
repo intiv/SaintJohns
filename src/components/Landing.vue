@@ -42,7 +42,6 @@
 		beforeMount() {
 			var usuario=localStorage.getItem('usuario');
 			if(usuario===null){
-				swal('No tiene acceso a esta pagina!', 'Debe hacer login primero','warning');
 				this.$router.push('/login');
 			}else{
 				var user=JSON.parse(usuario);
@@ -58,7 +57,7 @@
 									if(respuesta.body.success){
 										this.clases=respuesta.body.secciones;
 									}else{
-										swal('No se obtuvieron las secciones',response.body.message,'error');
+										swal('Error obteniendo las secciones!','Revise su conexion a internet','error');
 									}
 								});
 							}else{

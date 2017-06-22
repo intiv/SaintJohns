@@ -53,7 +53,6 @@ const router = new VueRouter({
 	]
 });
 
-router.replace('/login');
 new Vue({ // eslint-disable-line no-new
 	router,
 	render: (h) => h(App)
