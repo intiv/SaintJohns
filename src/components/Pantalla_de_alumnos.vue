@@ -41,7 +41,7 @@
 							<td>{{row.telefono}}</td>
 							<td>{{row.direccion}}</td>
 							<td>{{row.correo}}</td>
-
+							
 							<td>
 								<button v-on:click="removeMaestro(row)"><i class="small material-icons">delete</i></button>
 
@@ -68,6 +68,7 @@ import baseUrl from '../../config'
 			return{
 				showModal:false,
 				rows: [],
+				grado:'',
 				con:''
 
 			}
@@ -102,6 +103,11 @@ import baseUrl from '../../config'
 					this.rows='false';
 				}
 				
+			},
+			obteneralumno(row){
+				this.$http.get(`${baseUrl.uri}/alumnos/buscar/id/`+ this.rows[index]._id).then((response)=>{
+					this.grado=response.body.student.grado;
+				});
 			}
 		},
 		components : {
