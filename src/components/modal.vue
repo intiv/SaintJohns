@@ -36,7 +36,7 @@
                </div>
             </div>
             <div class="row">
-               <div class="input-field col s11">
+               <div class="input-field col s12">
 			      <i class="material-icons prefix">mode_edit</i>
                   <textarea id="address" class="materialize-textarea" v-model="maestro.direccion"></textarea>
                   <label for="address">Dirección</label>
@@ -67,18 +67,23 @@
                </div>
             </div>
 
-        <div id="boton_Aceptar">
-			<button class="btn" v-on:click="createBook" >Crear nuevo Maestro</button>
-		</div>      
+             
          </form>       
       </div>
 		        </slot>
 	        </div>
 	        <div class="modal-footer">
 	            <slot name="footer">
-	            	<button class="modal-default-button" v-on:click="$emit('close')">
-	            		OK
-	              	</button>
+	            	<div class="row" id="buttonsMaestroContainer">
+		            	<div id="boton_Aceptar" class="col l4 m4 s4 offset-l1 offset-m1 offset-s1">
+							<button class="btn" v-on:click="createBook">Finalizar</button>
+						</div> 
+						<div class="col l6 m6 s6">
+			            	<button class="modal-default-button btn" v-on:click="$emit('close')">
+			            		Cerrar
+			              	</button>
+		              	</div>
+	              	</div>
 	            </slot>
 	        </div>
         </div>
@@ -145,6 +150,9 @@ import baseUrl from '../../config'
 		transition: opacity .3s ease;
 	}
 
+	#buttonsMaestroContainer{
+		margin-left: 15%;
+	}
 	.modal-wrapper {
 	  display: table-cell;
 	  vertical-align: middle;
