@@ -5,21 +5,21 @@
 			<input type="text " name="buscar_maestros" v-model="con">
 		</div>
 		<div id="botondemodal">
-			<button id="show-modal" v-on:click="showModal = true"  class="btn">Crear nuevo Maestro</button>
+			<button id="show-modal" v-on:click="showModal = true"  class="btn">Crear nuevo Alumno</button>
 		</div>
 		
 		<div class="row" >
 			<div class="col l10 offset-l1" id="tablaContainer">
 				<table id="tabla" class="centered bordered white">
 					<colgroup>
-						<col style="width:10%">
-						<col style="width:10%">
+						<col style="width:20%">
+						<col style="width:20%">
 						<col style="width:10%">
 						<col style="width:3%">
+						<col style="width:12%">
+						<col style="width:15%">
 						<col style="width:10%">
-						<col style="width:21%">
-						<col style="width:10%">
-						
+						<col style="width: 10%">
 					</colgroup>
 					<thead>
 						<tr>
@@ -30,6 +30,7 @@
 							<td>Dirección</td>
 							<td>Correo</td>
 							<td>Borrar</td>
+							<td>Cuenta</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -40,9 +41,14 @@
 							<td>{{row.telefono}}</td>
 							<td>{{row.direccion}}</td>
 							<td>{{row.correo}}</td>
-
+							
 							<td>
 								<button v-on:click="removeMaestro(row)"><i class="small material-icons">delete</i></button>
+
+						
+							</td>
+							<td>
+								<button v-on:click="obteneralumno(row)"><i class="small material-icons">delete</i></button>				
 							</td>
 						</tr>
 					</tbody>
@@ -50,13 +56,14 @@
 			</div>
 		</div>
 		</div>
-		<modal v-if="showModal" @close="showModal = false">
-		</modal>
+		<modal1 v-if="showModal" @close="showModal = false">
+
+		</modal1>
 	</div>
 </template>
 
 <script>
-import modal from './modal.vue'
+import modal1 from './modal1.vue'
 import baseUrl from '../../config'
 	export default{
 		name: 'principal',
@@ -64,6 +71,7 @@ import baseUrl from '../../config'
 			return{
 				showModal:false,
 				rows: [],
+				grado:'',
 				con:''
 
 			}
@@ -73,14 +81,13 @@ import baseUrl from '../../config'
 		watch:{
 			con: function () {
 				if(this.con===""){
-					this.$http.get(`${baseUrl.uri}/usuarios/maestros`).then((response)=>{
-					this.rows=response.body.teachers;
+					this.$http.get(`${baseUrl.uri}/usuarios/alumnos`).then((response)=>{
+					this.rows=response.body.alumnos;
 				
 					});
 				}else{
-    			this.$http.get(`${baseUrl.uri}/usuarios/filtro/`+this.con).then((response)=>{
+    			this.$http.get(`${baseUrl.uri}/usuarios/filtro1/`+this.con).then((response)=>{
 					this.rows=response.body.users;
-				
 				
 			});		  
     		}
@@ -97,15 +104,25 @@ import baseUrl from '../../config'
 					this.rows='false';
 				}
 				
+			},
+			obteneralumno(row){
+				var index=this.rows.indexOf(row);
+				this.$http.get(`${baseUrl.uri}/alumnos/buscar/idu/`+ this.rows[index]._id).then((response)=>{
+					swal({
+						title: response.body.student.cuenta,
+						text: '',
+						type: 'success'
+					});
+				});
 			}
 		},
 		components : {
-			modal
+			modal1
 		},
 
 		beforeMount(){
-			this.$http.get(`${baseUrl.uri}/usuarios/maestros`).then((response)=>{
-					this.rows=response.body.teachers;
+			this.$http.get(`${baseUrl.uri}/usuarios/alumnos`).then((response)=>{
+					this.rows=response.body.alumnos;
 				
 			});
 		}

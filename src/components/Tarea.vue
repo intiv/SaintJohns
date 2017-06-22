@@ -72,7 +72,6 @@
 				el.unwrap();
 			},
 			enviar(){
-				alert(this.file);
 			}
 		},
 		beforeMount(){

@@ -9,41 +9,67 @@
 
 	          	</slot>
 	        </div>
-	        <div class´<<="modal-body">
+	        <div class ="modal-body">
 	 	       <slot name="body">
 	    	       <div class="row">
          <form class="col s12">
             <div class="row">
-               <div class="input-field col s6">
+               <div class="input-field col s5">
                   <i class="material-icons prefix">account_circle</i>
-                  <input placeholder="Username" value="Mahesh" id="name" type="text" class="active validate" required>
+                  <input  id="name" type="text" class="active validate" v-model="maestro.nombre" >
                   <label for="name">Nombre</label>
                </div>
-               <div class="input-field col s6">      
+               <div class="input-field col s7">      
+               		<div id="ape">
+               		
+                  <input  type="text" class="active validate" v-model="maestro.apellido">
                   <label for="name">Apellido</label>
-                  <input id="password" type="text" placeholder="name" class="active validate" required>          
+                  </div>
+                            
                </div>
             </div>
             <div class="row">
                <div class="input-field col s12">
-                  <input placeholder="Email" id="email" type="email" class="validate">
+               		 <i class="material-icons prefix">email</i>
+                  <input  id="email" type="email" class="validate" v-model="maestro.correo">
                   <label for="email">Correo Electronico</label>
                </div>
             </div>
             <div class="row">
-               <div class="input-field col s12">
+               <div class="input-field col s11">
 			      <i class="material-icons prefix">mode_edit</i>
-                  <textarea id="address" class="materialize-textarea"></textarea>
+                  <textarea id="address" class="materialize-textarea" v-model="maestro.direccion"></textarea>
                   <label for="address">Dirección</label>
                </div>
             </div>			
-            
-            <div class="input-field col s2">
+             <div class="row">
+              <div class="input-field col s5">
           		<i class="material-icons prefix">phone</i>
-          		<input id="icon_telephone" type="tel" class="validate">
+          		<input id="icon_telephone" type="tel" class="validate" v-model="maestro.telefono">
           		<label for="icon_telephone">Teléfono</label>
         	</div>
-                  
+        	
+            <div class="input-field col s7">
+				<div id="ano">     
+                  <input id="año" class="validate" v-model="maestro.fecha" type="text">
+                  <label for="año">Año de Nacimiento</label>
+               </div>
+
+            </div>			
+           
+           
+        	</div>
+        	 <div class="row">
+               <div class="input-field col s12">
+               		 <i class="material-icons prefix">lock_outline</i>
+                  <input id="contrasena" type="text" class="validate" v-model="maestro.contrasena">
+                  <label for="Contraseña">Contraseña</label>
+               </div>
+            </div>
+
+        <div id="boton_Aceptar">
+			<button class="btn" v-on:click="createBook" >Crear nuevo Maestro</button>
+		</div>      
          </form>       
       </div>
 		        </slot>
@@ -62,8 +88,46 @@
 </template>
 
 <script>
+import baseUrl from '../../config'
 	export default{
-		name: 'modal'
+		name: 'modal',
+		data() {
+			return{
+				maestro : {
+					nombre: '',
+					apellido: '',
+					fecha: '',
+					direccion: '',
+					telefono: '',
+					tipo: 'maestro',
+					correo: '',
+					scope:['maestro'],
+					contrasena: '',
+					usuario:'',
+					id:0 					
+				}
+			
+			}
+		},
+		methods : {
+			createBook(){
+					this.maestro.usuario=this.maestro.correo;
+					this.$http.post(`${baseUrl.uri}/usuarios/crear`,this.maestro).then((response)=>{
+						swal({
+							title: 'Maestro(a) creado con èxito!',
+							text: '',
+							type: 'success'
+						});
+					
+					});
+					this.$emite('close');
+
+			}
+			
+		},
+		beforeMount(){
+
+		}
 		
 	}
 </script>
@@ -87,8 +151,8 @@
 	}
 
 	.modal-container {
-	  width: 700px;
-	  height: 300px;
+	  width: 900px;
+	  height: 600px;
 	  margin: 0px auto;
 	  padding: 20px 30px;
 	  background-color: #fff;
@@ -119,5 +183,14 @@
 	.modal-leave-active .modal-container {
 	  -webkit-transform: scale(1.1);
 	  transform: scale(1.1);
+	}
+	#ape{
+		margin-left: 3vw;
+	}
+	#ano{
+		margin-left: 3vw;
+	}
+	.btn{
+		background-color: #2890CC !important; 
 	}
 </style>

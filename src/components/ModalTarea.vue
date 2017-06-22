@@ -182,12 +182,10 @@
 			}
 		},
 		beforeMount(){
-			alert(this.modo);
 			if(this.modo==='seccion'){
 				this.$http.get(`${baseUrl.uri}/usuarios/maestros`).then((response)=>{
 					if(response.body.success){
 						this.maestros=response.body.teachers;
-						alert(JSON.stringify(this.maestros));
 					}else{
 						swal('Error obteniendo maestros','Revise su conexion a internet','error');
 						this.$emit('close');

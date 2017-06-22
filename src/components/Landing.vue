@@ -17,7 +17,7 @@
 								<h4><i class="material-icons medium">class</i>Secciones</h4>
 							</div>
 							<div class="col l2 m2 s2">
-								<button class="btn-floating waves-light waves-effect btn buttonAgregarSeccion" v-on:click="crearSeccion()">
+								<button v-if="tipo===3" class="btn-floating waves-light waves-effect btn buttonAgregarSeccion" v-on:click="crearSeccion()">
 									<i class="material-icons">add</i>
 								</button>
 							</div>
@@ -33,7 +33,7 @@
 									</a>
 								</div>
 								<div class="col l2 m2 s2">
-									<button class="btn-floating waves-effect waves-light btn buttonBorrarSeccion" v-on:click="borrarSeccion(clase)">
+									<button v-if="tipo===3" class="btn-floating waves-effect waves-light btn buttonBorrarSeccion" v-on:click="borrarSeccion(clase)">
 										<i class="material-icons">delete</i>
 									</button>
 								</div>
@@ -135,7 +135,7 @@
 			}else{
 				var user=JSON.parse(usuario);
 				if(user.scope[0]==='alumno'){
-					this.tipo=0;
+					this.tipo=1;
 					this.$http.get(`${baseUrl.uri}/usuario/`+user.cuenta).then((response)=>{
 						if(response.body.success){
 							this.usuario = response.body.usuario;

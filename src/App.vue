@@ -18,14 +18,14 @@
                     </router-link>
                   </div>
                   <div class="col l8 m8 s8">
-                    <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="material-icons">menu</i></a>
-                    <ul class="side-nav" id="mobile-demo">
-                      <li><router-link to="/test">Estudiantes</router-link></li>
-                      <li><a href="#">Maestros</a></li>
+                    <a href="#" v-if="tipo!=1" data-activates="mobile-demo" class="button-collapse right"><i class="material-icons">menu</i></a>
+                    <ul v-if="tipo!=1" class="side-nav" id="mobile-demo">
+                      <li><router-link to="/alumnos">Estudiantes</router-link></li>
+                      <li><router-link to="/maestros">Maestros</router-link></li>
                     </ul>
                     <ul id="nav-mobile" class="right hide-on-med-and-down">
-                      <li><router-link to="/test">Estudiantes</router-link></li>
-                      <li><a href="#">Maestros</a></li>
+                      <li><router-link to="/alumnos">Estudiantes</router-link></li>
+                      <li><router-link to="/maestros">Maestros</router-link></li>
                     </ul>
                   </div>
                 </div>
@@ -42,7 +42,7 @@
             <a href="#"><p>Hoja de Tareas</p></a>
           </div>
           <div class="sideContent">
-            <a href="#"><p>Notas</p></a>
+            <a v-on:click="showModal=true"><p>Notas</p></a>
           </div>
           <div class="sideContent">
             <a href="#"><p>Anuncios</p></a>
@@ -56,16 +56,23 @@
         <router-view></router-view>
       </div>
     </div>
+    
   </div>
 </template>
 
 <script>
+  import modal1 from './components/modal1.vue'
 	export default {
   		name: 'app',
       data(){
         return{
-          ruta : '/'
+          ruta : '/',
+          showModal : false,
+          tipo: 0
         }
+      },
+      components: {
+        modal1
       },
       methods : {
         checkPath(){
@@ -80,6 +87,20 @@
       },
       mounted() {
         $(".button-collapse").sideNav();
+      },
+      beforeMount(){
+        if(localStorage.getItem('usuario')===null){
+          this.$router.push('/login');
+        }else{
+          var user=JSON.parse(localStorage.getItem('usuario'));
+          if(user.scope[0]==='alumno'){
+            this.tipo=1;
+          }else if(user.scope[0]==='admin'){
+            this.tipo=3;
+          }else if(user.scope[0]==='maestro'){
+            this.tipo=2;
+          }
+        }
       }
 	}
 </script>

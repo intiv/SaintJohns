@@ -57,10 +57,10 @@
 					this.valid=false;
 					message+='-Contraseña no puede ser vacia\n';
 				}
-				if(/^[a-zA-z0-9]+$/.test(this.user.usuario) && /^[a-zA-z0-9]+$/.test(this.user.contrasena)){
+				if(/^[a-zA-z0-9]+$/.test(this.user.contrasena)){
 					this.valid=true;
 				}else{
-					message+='-Usuario y contraseña solo deben tener letras y numeros';
+					message+='-Contraseña solo debe tener letras y numeros';
 					this.valid=false;
 				}
 				if(this.valid){
