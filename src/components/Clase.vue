@@ -243,8 +243,8 @@
 				</li>
 			</ul>
 		</div>
-		<modalTarea v-if="showModal" @close="showModal=false" @done="finishModal()" :parcial="parcial" :seccion="sec"></modalTarea>
-		<modalTarea v-if="showModify" @close="showModify=false" @done="finishModal()" :modify="true" :homework="tareaToModify"></modalTarea>
+		<modalTarea v-if="showModal" @close="showModal=false" @done="finishModal()" :parcial="parcial" :seccion="sec" modo="tarea"></modalTarea>
+		<modalTarea v-if="showModify" @close="showModify=false" @done="finishModal()" :modify="true" :homework="tareaToModify" modo="tarea"></modalTarea>
 	</div>
 </template>
 
@@ -272,7 +272,6 @@
 				showModal: false,
 				showModify: false,
 				tareaToModify: {
-
 				},
 				parcial: 0,
 				modifyingInfo: false
@@ -315,7 +314,6 @@
 					if(response.body.success){
 						for(var i =0; i<response.body.tareas.length; i++){
 							var currHW = response.body.tareas[i];
-
 							if(currHW.parcial===1){
 								if(this.parcial1.indexOf(currHW)===-1){
 									this.parcial1.push(currHW);
@@ -409,36 +407,30 @@
 </script>
 
 <style scoped>
-
 	#claseInfo{
 		text-align: center;
 	}
-
 	#tareasContainer{
 		max-height: 50vh;
 		overflow-y: scroll;
 		overflow-x: auto;
 		display: block;
 	}
-
 	.buttonText{
 		font-size: 1vw;
 	}
-
 	.buttonBorrarTarea{
 		width: 3vw;
 		background-color: #7D2323;
 		font-size: 1vw;
 		text-align: center;
 	}
-
 	.buttonAccionTarea{
 		width: 10vw;
 		font-size: 1vw;
 		background-color: #15497B;
 		text-align: center;
 	}
-
 	.buttonAgregarTarea{
 		padding-left: 1.7%;
 		font-size: 1vw;
@@ -446,16 +438,12 @@
 		width: 2.5vw;
 		height: 5vh;
 	}
-
-
 	.buttonBorrarTarea:hover{
 		background-color: #612B2B;
 		transition: background-color 0.3s ease-in-out;
 	}
-
 	.buttonAccionTarea:hover{
 		background-color: #13416D;
 		transition: background-color 0.3s ease-in-out;
 	}
-
 </style>

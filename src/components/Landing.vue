@@ -11,7 +11,19 @@
 		<div class="row">
 			<div class="col l10 m10 s10 offset-l1 offset-m1 offset-s1" id="userClasesContainer">
 				<ul class="collection with-header">
-					<li class="collection-header"><h4><i class="material-icons medium">class</i>Secciones</h4></li>
+					<li class="collection-header">
+						<div class="row">
+							<div class="col l10 m10 s10">
+								<h4><i class="material-icons medium">class</i>Secciones</h4>
+							</div>
+							<div class="col l2 m2 s2">
+								<button class="btn-floating waves-light waves-effect btn buttonAgregarSeccion" v-on:click="crearSeccion()">
+									<i class="material-icons">add</i>
+								</button>
+							</div>
+						</div>	
+					</li>
+
 					<ul v-for="clase in clases">
 						<li class="collection-item">
 							<div class="row">
@@ -53,11 +65,13 @@
 				
 			</div>
 		</div>
+		<modalTarea v-if="showModal" @close="showModal=false" @done="finishModal" modo="seccion"></modalTarea>
 	</div>
 </template>
 
 <script>
 	import baseUrl from '../../config'
+	import modalTarea from './ModalTarea.vue'
 	export default{
 
 		name: 'landing',
@@ -70,8 +84,12 @@
 
 				},
 				clases: [],
-				tipo: 0
+				tipo: 0,
+				showModal: false
 			}
+		},
+		components : {
+			modalTarea
 		},
 		methods: {
 			redirect(clase){
@@ -101,8 +119,15 @@
 					}
 				});
 				
+			},
+			crearSeccion(){
+				this.showModal=true;
+			},
+			finishModal(seccion){
+				this.clases.push(seccion);
 			}
 		},
+
 		beforeMount() {
 			var usuario=localStorage.getItem('usuario');
 			if(usuario===null){
