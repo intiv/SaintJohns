@@ -5,7 +5,7 @@
 			<input type="text " name="buscar_maestros" v-model="con">
 		</div>
 		<div id="botondemodal">
-			<button id="show-modal" v-on:click="showModal = true"  class="btn">Crear nuevo Maestro</button>
+			<button v-if="tipo===3" id="show-modal" v-on:click="showModal = true"  class="btn">Crear nuevo Maestro</button>
 		</div>
 		
 		<div class="row" >
@@ -29,7 +29,7 @@
 							<td>Teléfono</td>
 							<td>Dirección</td>
 							<td>Correo</td>
-							<td>Borrar</td>
+							<td v-if="tipo===3">Borrar</td>
 						</tr>
 					</thead>
 					<tbody>
@@ -41,7 +41,7 @@
 							<td>{{row.direccion}}</td>
 							<td>{{row.correo}}</td>
 
-							<td>
+							<td v-if="tipo===3">
 								<button v-on:click="removeMaestro(row)"><i class="small material-icons">delete</i></button>
 							</td>
 						</tr>
@@ -64,7 +64,8 @@ import baseUrl from '../../config'
 			return{
 				showModal:false,
 				rows: [],
-				con:''
+				con:'',
+				tipo: 1
 
 			}
 				
@@ -104,10 +105,22 @@ import baseUrl from '../../config'
 		},
 
 		beforeMount(){
-			this.$http.get(`${baseUrl.uri}/usuarios/maestros`).then((response)=>{
-					this.rows=response.body.teachers;
-				
-			});
+			if(localStorage.getItem('usuario')===null){
+				swal('No tiene acceso a esta pagina!','Debe hacer login primero','warning');
+			}else{
+				var user=JSON.parse(localStorage.getItem('usuario'));
+				if(user.scope[0]==='alumno'){
+					this.tipo=1;
+				}else if(user.scope[0]==='maestro'){
+					this.tipo=2;
+				}else if(user.scope[0]==='admin'){
+					this.tipo=3;
+				}
+				this.$http.get(`${baseUrl.uri}/usuarios/maestros`).then((response)=>{
+						this.rows=response.body.teachers;
+					
+				});
+			}	
 		}
 
 	}
