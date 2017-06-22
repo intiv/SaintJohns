@@ -3,7 +3,7 @@
 		<div id="container">
 			<div class="row" id="header">
 				<div class="col l4 m4 s4">
-					<img src="../imgs/icon.jpg" class="circle responsive-image" alt="icono" id="logo">
+					<img src="http://i.imgur.com/sqcFDxY.jpg" class="circle responsive-image" alt="icono" id="logo">
 				</div>
 				<div class="col l8 m8 s8" id="title">
 					<h3>&nbsp;&nbsp;Saint John's </h3>
@@ -125,7 +125,8 @@
 	#loginRoot{
 		width:100vw;
 		height: 100vh;
-		background-image: url('../../imgs/bluegradient.jpg');
+		background-image: url('https://images.freecreatives.com/wp-content/uploads/2016/02/Free-Cool-Blue-Gradient-Background.jpg');
+		/*background-image: url('../../imgs/bluegradient.jpg');*/
 		background-repeat: no-repeat;
 		background-size: cover;
 		padding-top: 10%;
@@ -175,7 +176,7 @@
 	}
 
 	#app{
-		background-image: url('../../imgs/bluegradient.jpg');
+		background-image: url('https://images.freecreatives.com/wp-content/uploads/2016/02/Free-Cool-Blue-Gradient-Background.jpg');
 		background-size: cover;
 	}
 

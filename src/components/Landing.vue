@@ -1,21 +1,18 @@
 <template>
 	<div id="landingRoot">
 		<div class="row">
-			<div class="col l8 m8 s8 offset-l2 offset-m2 offset-s2" id="userInfoContainer">
-				<h3>{{usuario.nombre}}&nbsp;{{usuario.apellido}}</h3>
-				<h3> {{alumno.cuenta}}, {{alumno.nombre}} </h3>
+			<div class="col l12 m12 s12" id="userInfoContainer">
+				<h3>{{usuario.nombre}}&nbsp;{{usuario.apellido}}</h3> <!-- remover-->
+				<h3><i class="material-icons medium">person_pin</i>{{alumno.nombre}} - {{alumno.cuenta}}</h3>
 			</div>
 		</div>
 		<div class="row">
 			<div class="col l10 m10 s10 offset-l1 offset-m1 offset-s1" id="userClasesContainer">
-				<ul v-for="clase in clases">
-					<li> {{clase.cuenta}} </li>
-					<li> {{clase.grado}} </li>
-					<li> {{clase.apartado}} </li>
-					<li> {{clase.ano}} </li>
-					<li> {{clase.maestro}} </li>
-					<li><hr></li>
+				<ul class="collection with-header">
+					<li class="collection-header"><h4><i class="material-icons medium">class</i>Clases</h4></li>
+					<a v-for="clase in clases" class="collection-item" v-on:click="redirect(clase)"> {{clase.cuenta}} </a>
 				</ul>
+				
 			</div>
 		</div>
 	</div>
@@ -35,6 +32,11 @@
 
 				},
 				clases: []
+			}
+		},
+		methods: {
+			redirect(clase){
+				this.$router.push(`/clase?clase=`+clase.cuenta+'&grado='+clase.grado+'&apartado='+clase.apartado+'&year='+clase.ano);
 			}
 		},
 		beforeMount() {
@@ -85,6 +87,12 @@
 		display: block;
 		overflow-y: scroll;
 		overflow-x: scroll;
+		animation: slidein 2s;
+	}
+
+	#userInfoContainer{
+		text-align: center;
+		animation: slidein 1s;
 	}
 
 	

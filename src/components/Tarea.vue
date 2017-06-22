@@ -6,9 +6,7 @@
 					<div id="tareaHeader">
 						<div class="row">
 							<h3 id="tareaTitulo">{{tarea.titulo}}</h3>
-							<p id="tareaDescripcion">{{tarea.descripcion}}</p>
-							
-							
+							<p id="tareaDescripcion">{{tarea.descripcion}}</p>		
 						</div>
 					</div>
 					<hr>
@@ -32,12 +30,12 @@
 			<div class="col l10 m10 s10 offset-l1">
 				<div id="tarea-buttons">
 					<div class="row">
-						<div class="col l4 push-l1">
+						<!-- <div class="col l4 push-l1">
 							<button  disabled class="waves-effect waves-light btn" id="enviarTarea" v-on:click="enviar">Enviar</button>
 						</div>
 						<div class="col l4">
 							<button id="cancelarTarea" v-on:click="cancelar" class="waves-effect waves-light btn">Cancelar</button>
-						</div>
+						</div> -->
 					</div>
 				</div>
 			</div>

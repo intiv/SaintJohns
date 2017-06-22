@@ -18,7 +18,12 @@
                     </router-link>
                   </div>
                   <div class="col l8 m8 s8">
-                    <ul id="nav-mobile" class="right">
+                    <a href="#" data-activates="mobile-demo" class="button-collapse right"><i class="material-icons">menu</i></a>
+                    <ul class="side-nav" id="mobile-demo">
+                      <li><router-link to="/test">Estudiantes</router-link></li>
+                      <li><a href="#">Maestros</a></li>
+                    </ul>
+                    <ul id="nav-mobile" class="right hide-on-med-and-down">
                       <li><router-link to="/test">Estudiantes</router-link></li>
                       <li><a href="#">Maestros</a></li>
                     </ul>
@@ -74,7 +79,7 @@
         }
       },
       mounted() {
-        console.log(this.$route.path);
+        $(".button-collapse").sideNav();
       }
 	}
 </script>
@@ -129,12 +134,16 @@
     
   }
 
+  #mobile-demo{
+    z-index: 9998;
+  }
+
   nav{
-    -webkit-animation: fadein 2s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 2s; /* Firefox < 16 */
-    -ms-animation: fadein 2s; /* Internet Explorer */
-    -o-animation: fadein 2s; /* Opera < 12.1 */
-    animation: fadein 2s;
+    -webkit-animation: fadein 1s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 1s; /* Firefox < 16 */
+    -ms-animation: fadein 1s; /* Internet Explorer */
+    -o-animation: fadein 1s; /* Opera < 12.1 */
+    animation: fadein 1s;
     background-color: #2B455E;
     filter: saturate(200%);
     width: 95vw;
@@ -170,6 +179,7 @@
   .brand-logo{
     height: 100%;
     position: absolute;
+    font-size: 15vh;
   }
 
   #nav-mobile>li>a{
@@ -178,11 +188,11 @@
   }
 
   aside{
-    -webkit-animation: fadein 2.5s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadein 2.5s; /* Firefox < 16 */
-    -ms-animation: fadein 2.5s; /* Internet Explorer */
-    -o-animation: fadein 2.5s; /* Opera < 12.1 */
-    animation: fadein 2.5s;
+    -webkit-animation: fadein 1.5s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadein 1.5s; /* Firefox < 16 */
+    -ms-animation: fadein 1.5s; /* Internet Explorer */
+    -o-animation: fadein 1.5s; /* Opera < 12.1 */
+    animation: fadein 1.5s;
     border: 1px solid red;
     background-color: red;
     filter: saturate(35%);

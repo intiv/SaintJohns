@@ -15,7 +15,18 @@
 		<div id="tareasContainer">
 			<ul class="collapsible" data-collapsible="accordion">
 				<li>
-					<div v-on:click="collapse" class="collapsible-header">Parcial 1</div>
+					<div v-on:click="collapse" class="collapsible-header">
+						<div class="row">
+							<div class="col l10 m10 s10">
+								Parcial 1
+							</div>
+							<div class="col l2 m2 s2">
+								<button class="buttonAgregarTarea btn-floating waves-effect waves-light btn" v-on:click="nuevaTarea(1)">
+									<i class="material-icons agregar">add</i>
+								</button>
+							</div>
+						</div>
+					</div>
 					<div class="collapsible-body">
 						<ul class="collapsible" data-collapsible="accordion" v-for="tarea in parcial1">
 							<li>
@@ -31,13 +42,15 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<button id="" class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
+											<button class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
 												<div class="buttonText" v-if="isStudent===0">Agregar</div>
 												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
 										</div>
 										<div class="col l2 m2 s2">
-											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(1,tarea)">X</button>
+											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(1,tarea)">
+												<i class="material-icons">delete</i>
+											</button>
 										</div>
 									</div>
 								</div>
@@ -47,7 +60,18 @@
 					</div>
 				</li>
 				<li>
-					<div v-on:click="collapse" class="collapsible-header">Parcial 2</div>
+					<div v-on:click="collapse" class="collapsible-header">
+						<div class="row">
+							<div class="col l10 m10 s10">
+								Parcial 2
+							</div>
+							<div class="col l2 m2 s2">
+								<button class="buttonAgregarTarea btn-floating waves-effect waves-light btn" v-on:click="nuevaTarea(2)">
+									<i class="material-icons agregar">add</i>
+								</button>
+							</div>
+						</div>						
+					</div>
 					<div class="collapsible-body">
 						<ul class="collapsible" data-collapsible="accordion" v-for="tarea in parcial2">
 							<li>
@@ -67,7 +91,9 @@
 											</button>
 										</div>
 										<div class="col l2 m2 s2">
-											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(2,tarea)">X</button>
+											<button v-if="isStudent===1" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(2,tarea)">
+												<i class="material-icons small">delete</i>
+											</button>
 										</div>
 									</div>
 								</div>
@@ -77,12 +103,29 @@
 					</div>
 				</li>
 				<li>
-					<div v-on:click="collapse" class="collapsible-header">Parcial 3</div>
+					<div v-on:click="collapse" class="collapsible-header">
+						<div class="row">
+							<div class="col l10 m10 s10">
+								Parcial 3
+							</div>
+							<div class="col l2 m2 s2">
+								<button class="buttonAgregarTarea btn-floating waves-effect waves-light btn" v-on:click="nuevaTarea(3)">
+									<i class="material-icons agregar">add</i>
+								</button>
+							</div>
+						</div>
+
+					</div>
 					<div class="collapsible-body">
 						<ul class="collapsible" data-collapsible="accordion" v-for="tarea in parcial3">
 							<li>
 								<div v-on:click="collapse" class="collapsible-header">
-									{{tarea.titulo}} - {{tarea.parcial}}: {{tarea.valor}} Puntos
+									<div class="row">
+										<div class="col l12 m12 s12">
+											{{tarea.titulo}} - {{tarea.parcial}}: {{tarea.valor}} Puntos
+										</div>
+										
+									</div>
 								</div>
 								<div class="collapsible-body">
 									<div class="row">
@@ -98,8 +141,15 @@
 												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
 										</div>
-										<div class="col l2 m2 s2">
-											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn"  v-on:click="borrar(3,tarea)">X</button>
+										<div class="col l1 m1 s1">
+											<button :v-if="(isStudent===1||isStudent===2)" class="buttonModificarTarea btn-floating waves-effect waves-light btn orange" v-on:click="modificar(tarea)"> 
+												<i class="material-icons">create</i>
+											</button>
+										</div>
+										<div class="col l1 m1 s1">
+											<button :v-if="(isStudent===1||isStudent===2)" class="buttonBorrarTarea btn-floating waves-effect waves-light btn"  v-on:click="borrar(3,tarea)">
+												<i class="material-icons">delete</i>
+											</button>
 										</div>
 									</div>
 								</div>
@@ -109,7 +159,18 @@
 					</div>
 				</li>
 				<li>
-					<div v-on:click="collapse" class="collapsible-header">Parcial 4</div>
+					<div v-on:click="collapse" class="collapsible-header">
+						<div class="row">
+							<div class="col l10 m10 s10">
+								Parcial 4
+							</div>
+							<div class="col l2 m2 s2">
+								<button class="buttonAgregarTarea btn-floating waves-effect waves-light btn" v-on:click="nuevaTarea(4)">
+									<i class="material-icons agregar">add</i>
+								</button>
+							</div>
+						</div>
+					</div>
 					<div class="collapsible-body">
 						<ul class="collapsible" data-collapsible="accordion" v-for="tarea in parcial4">
 							<li>
@@ -131,7 +192,9 @@
 											</button>
 										</div>
 										<div class="col l2 m2 s2">
-											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(4,tarea)">X</button>
+											<button v-if="isStudent===1" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(4,tarea)">
+												<i class="material-icons">delete</i>
+											</button>
 										</div>
 									</div>
 								</div>
@@ -142,11 +205,14 @@
 				</li>
 			</ul>
 		</div>
+		<modalTarea v-if="showModal" @close="showModal=false" @done="finishModal()" :parcial="parcial" :seccion="sec"></modalTarea>
+		<modalTarea v-if="showModify" @close="showModify=false" @done="finishModal()" :modify="true" :homework="tareaToModify"></modalTarea>
 	</div>
 </template>
 
 <script>
 	import baseUrl from '../../config'
+	import modalTarea from './ModalTarea.vue'
 	export default{
 		name: 'Clase',
 		data() {
@@ -164,8 +230,17 @@
 				},
 				colapsado: false,
 				isStudent: 0,
-				sec: ''
+				sec: '',
+				showModal: false,
+				showModify: false,
+				tareaToModify: {
+
+				},
+				parcial: 0
 			}
+		},
+		components: {
+			modalTarea
 		},
 		methods : {
 			collapse(){
@@ -204,16 +279,23 @@
 					if(response.body.success){
 						for(var i =0; i<response.body.tareas.length; i++){
 							var currHW = response.body.tareas[i];
+
 							if(currHW.parcial===1){
 								if(this.parcial1.indexOf(currHW)===-1){
 									this.parcial1.push(currHW);
 								}
 							}else if(currHW.parcial===2){
-								this.parcial2.push(currHW);
+								if(this.parcial3.indexOf(currHW)===-1){
+									this.parcial3.push(currHW);
+								}
 							}else if(currHW.parcial===3){
-								this.parcial3.push(currHW);
+								if(this.parcial3.indexOf(currHW)===-1){
+									this.parcial3.push(currHW);
+								}
 							}else if(currHW.parcial===4){
-								this.parcial4.push(currHW);
+								if(this.parcial3.indexOf(currHW)===-1){
+									this.parcial3.push(currHW);
+								}
 							}
 						}
 					}else{
@@ -224,6 +306,25 @@
 						);
 					}
 				});
+			},
+			nuevaTarea(parcial){
+				this.parcial=parcial;
+				this.showModal=true;
+			},
+			finishModal(){
+				// this.parcial1=[],
+				// this.parcial2=[],
+				// this.parcial3=[],
+				// this.parcial4=[],
+				this.showModal=false;
+				this.showModify=false;
+				// this.getTareas();
+				// $('.collapsible').collapsible();
+			},
+			modificar(tarea){
+
+				this.tareaToModify=tarea;
+				this.showModify=true;
 			}
 		},
 		beforeMount(){
@@ -233,18 +334,27 @@
 				swal('No puede acceder a esta pagina!','Debe hacer login antes de acceder a la pagina','warning');
 				this.$router.push('/login');
 			}else{
-				this.$http.get(`${baseUrl.uri}/seccion/buscar?cuenta=`+query.cuenta+'&grado='+query.grado+'&year='+query.year+'&apartado='+query.apartado).then((response)=>{
+				var scope=JSON.parse(localStorage.getItem('usuario')).scope;
+				if(scope=='admin'){
+					this.isStudent=2;
+				}else if(scope=='maestro'){
+					this.isStudent=1;
+				}
+				this.$http.get(`${baseUrl.uri}/seccion/buscar?cuenta=`+query.clase+'&grado='+query.grado+'&year='+query.year+'&apartado='+query.apartado).then((response)=>{
 					if(response.body.success){
+						
+						this.sec=(query.year+'_'+query.grado+'_'+query.apartado+'_'+query.clase);
+						this.getTareas();
 						this.seccion=response.body.seccion;
 						this.$http.get(`${baseUrl.uri}/usuarios/maestros/`+this.seccion.maestro).then((respuesta)=>{
 							if(respuesta.body.success){
 								this.seccion.maestro=respuesta.body.teacher.nombre;
 							}else{
+								this.seccion.maestro='';
 								swal('Error obteniendo maestro',respuesta.body.message,'error');
 							}
 						});
-						this.sec=(query.year+'_'+query.grado+'_'+query.apartado+'_'+query.cuenta);
-						this.getTareas();						
+												
 					}else{
 						swal('Error obteniendo seccion',response.body.message+', '+response.body.tipo,'error');
 					}
@@ -274,13 +384,25 @@
 	.buttonBorrarTarea{
 		width: 3vw;
 		background-color: #7D2323;
+		font-size: 1vw;
+		text-align: center;
 	}
 
 	.buttonAccionTarea{
 		width: 10vw;
 		font-size: 1vw;
 		background-color: #15497B;
+		text-align: center;
 	}
+
+	.buttonAgregarTarea{
+		padding-left: 1.7%;
+		font-size: 1vw;
+		text-align: center;
+		width: 2.5vw;
+		height: 5vh;
+	}
+
 
 	.buttonBorrarTarea:hover{
 		background-color: #612B2B;
