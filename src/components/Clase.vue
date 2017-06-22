@@ -17,8 +17,8 @@
 
 								<li> {{seccion.info}}</li>
 							</div>
-							<div class="col l1 m1 s1 push-l1 push-m1 push-s1">
-								<button class="btn-floating waves-light waves-effect btn" v-on:click="modifyingInfo=true"><i class="material-icons">create</i></button>
+							<div class="col l1 m1 s1 push-l1 push-m1 push-s1" v-if="(isStudent===1||isStudent===2)">
+								<button class="btn-floating waves-light waves-effect btn orange" v-on:click="modifyingInfo=true"><i class="material-icons">create</i></button>
 							</div>
 						</div>
 					</div>
@@ -43,7 +43,7 @@
 							<div class="col l10 m10 s10">
 								Parcial 1
 							</div>
-							<div class="col l2 m2 s2">
+							<div class="col l2 m2 s2" v-if="isStudent===1">
 								<button class="buttonAgregarTarea btn-floating waves-effect waves-light btn" v-on:click="nuevaTarea(1)">
 									<i class="material-icons agregar">add</i>
 								</button>
@@ -65,18 +65,18 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<button class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
+											<button class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0||isStudent===1">
 												<div class="buttonText" v-if="isStudent===0">Agregar</div>
 												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
 										</div>
 										<div class="col l1 m1 s1">
-											<button :v-if="(isStudent===1||isStudent===2)" class="buttonModificarTarea btn-floating waves-effect waves-light btn orange" v-on:click="modificar(tarea)"> 
+											<button v-if="(isStudent===1||isStudent===2)" class="buttonModificarTarea btn-floating waves-effect waves-light btn orange" v-on:click="modificar(tarea)"> 
 												<i class="material-icons">create</i>
 											</button>
 										</div>
 										<div class="col l1 m1 s1">
-											<button v-if="isStudent===0" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(1,tarea)">
+											<button v-if="(isStudent===1||isStudent===2)" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(1,tarea)">
 												<i class="material-icons">delete</i>
 											</button>
 										</div>
@@ -93,7 +93,7 @@
 							<div class="col l10 m10 s10">
 								Parcial 2
 							</div>
-							<div class="col l2 m2 s2">
+							<div class="col l2 m2 s2" v-if="(isStudent===1)">
 								<button class="buttonAgregarTarea btn-floating waves-effect waves-light btn" v-on:click="nuevaTarea(2)">
 									<i class="material-icons agregar">add</i>
 								</button>
@@ -113,7 +113,7 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<button class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
+											<button class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0||isStudent===1">
 												<div class="buttonText" v-if="isStudent===0">Agregar</div>
 												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
@@ -141,7 +141,7 @@
 							<div class="col l10 m10 s10">
 								Parcial 3
 							</div>
-							<div class="col l2 m2 s2">
+							<div class="col l2 m2 s2" v-if="(isStudent===1)">
 								<button class="buttonAgregarTarea btn-floating waves-effect waves-light btn" v-on:click="nuevaTarea(3)">
 									<i class="material-icons agregar">add</i>
 								</button>
@@ -169,18 +169,18 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<button class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
+											<button class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0||isStudent===1">
 												<div class="buttonText" v-if="isStudent===0">Agregar</div>
 												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
 										</div>
 										<div class="col l1 m1 s1">
-											<button :v-if="(isStudent===1||isStudent===2)" class="buttonModificarTarea btn-floating waves-effect waves-light btn orange" v-on:click="modificar(tarea)"> 
+											<button v-if="(isStudent===1||isStudent===2)" class="buttonModificarTarea btn-floating waves-effect waves-light btn orange" v-on:click="modificar(tarea)"> 
 												<i class="material-icons">create</i>
 											</button>
 										</div>
 										<div class="col l1 m1 s1">
-											<button :v-if="(isStudent===1||isStudent===2)" class="buttonBorrarTarea btn-floating waves-effect waves-light btn"  v-on:click="borrar(3,tarea)">
+											<button v-if="(isStudent===1||isStudent===2)" class="buttonBorrarTarea btn-floating waves-effect waves-light btn"  v-on:click="borrar(3,tarea)">
 												<i class="material-icons">delete</i>
 											</button>
 										</div>
@@ -197,7 +197,7 @@
 							<div class="col l10 m10 s10">
 								Parcial 4
 							</div>
-							<div class="col l2 m2 s2">
+							<div class="col l2 m2 s2" v-if="(isStudent===1)">
 								<button class="buttonAgregarTarea btn-floating waves-effect waves-light btn" v-on:click="nuevaTarea(4)">
 									<i class="material-icons agregar">add</i>
 								</button>
@@ -219,7 +219,7 @@
 											</span> 
 										</div>
 										<div class="col l2 m2 s2">
-											<button id="" class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0">
+											<button id="" class="buttonAccionTarea waves-effect waves-light btn" v-on:click="redirect(tarea._id)" v-if="isStudent===0||isStudent===1">
 												<div class="buttonText" v-if="isStudent===0">Agregar</div>
 												<div class="buttonText" v-if="isStudent===1">Revisar</div>
 											</button>
@@ -230,7 +230,7 @@
 											</button>
 										</div>
 										<div class="col l1 m1 s1">
-											<button v-if="isStudent===1" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(4,tarea)">
+											<button v-if="isStudent===1||isStudent===2" class="buttonBorrarTarea btn-floating waves-effect waves-light btn" v-on:click="borrar(4,tarea)">
 												<i class="material-icons">delete</i>
 											</button>
 										</div>
